@@ -1,0 +1,354 @@
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">CRUD za objave</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addEmployee" type="submit">Dodaj objavu</button>
+          </div>
+        </div>
+    </nav>
+
+
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Naslov</th>
+            <th scope="col">Tekst</th>
+            <th scope="col">ID zajednice</th>
+            <th scope="col">Izmena, brisanje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of empList">
+            <td>{{employee.id}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.salary}}</td>
+            <td>
+                <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee" (click)="editEmployee(employee)">Izmena</button>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteEmployee(employee)">Brisanje</button>
+            </td>
+
+          </tr>
+          
+        </tbody>
+      </table>
+
+  
+  <!-- Add post modal -->
+  <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dodaj novu objavu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form [formGroup]="empDetail">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Naslov </label>
+                    <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Tekst </label>
+                  <input type="text" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">ID zajednice </label>
+                    <input type="text" formControlName="salary" class="form-control" id="email" aria-describedby="emailHelp">
+                  </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addEmployee()">Dodaj objavu</button>
+                  </div>
+              </form>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Edit post modal -->
+  <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Izmeni objavu - detalji</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="empDetail">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Naslov </label>
+                    <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Tekst </label>
+                  <input type="text" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">ID zajednice </label>
+                    <input type="text" formControlName="salary" class="form-control" id="email" aria-describedby="emailHelp">
+                  </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                    <button type="button" class="btn btn-outline-success" (click)="updateEmployee()" data-bs-dismiss="modal">Izmeni </button>
+                  </div>
+              </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">CRUD za zajednice</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCommunity" type="submit">Dodaj zajednicu</button>
+      </div>
+    </div>
+</nav>
+
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Ime</th>
+        <th scope="col">Opis</th>
+        <th scope="col">Pravila</th>
+        <th scope="col">Izmena, brisanje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let zajednica of communityList">
+        <td>{{zajednica.id}}</td>
+        <td>{{zajednica.imeZajednice}}</td>
+        <td>{{zajednica.opisZajednice}}</td>
+        <td>{{zajednica.pravilaZajednice}}</td>
+        <td>
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editCommunity" (click)="editCommunity(zajednica)">Izmena</button>
+            <button type="button" class="btn btn-outline-danger" (click)="deleteCommunity(zajednica)">Brisanje</button>
+        </td>
+
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+<!-- Add post modal -->
+<div class="modal fade" id="addCommunity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Dodaj novu zajednicu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      
+        <form [formGroup]="communityDetail">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Ime </label>
+                <input type="text" formControlName="imeZajednice" class="form-control" id="imeZajednice" aria-describedby="emailHelp">
+              </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Opis </label>
+              <input type="text" formControlName="opisZajednice" class="form-control" id="opisZajednice" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Pravila </label>
+                <input type="text" formControlName="pravilaZajednice" class="form-control" id="pravilaZajednice" aria-describedby="emailHelp">
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addCommunity()">Dodaj zajednicu</button>
+              </div>
+          </form>
+
+    </div>
+    
+  </div>
+</div>
+</div>
+
+
+<!-- Edit post modal -->
+<div class="modal fade" id="editCommunity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Izmeni zajednicu - detalji</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+
+        <form [formGroup]="communityDetail">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Ime </label>
+                <input type="text" formControlName="imeZajednice" class="form-control" id="imeZajednice" aria-describedby="emailHelp">
+              </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Opis </label>
+              <input type="text" formControlName="opisZajednice" class="form-control" id="opisZajednice" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Pravila </label>
+                <input type="text" formControlName="pravilaZajednice" class="form-control" id="pravilaZajednice" aria-describedby="emailHelp">
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-outline-success" (click)="updateCommunity()" data-bs-dismiss="modal">Izmeni </button>
+              </div>
+          </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Registracija korisnika</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addUser" type="submit">Registruj se</button>
+    </div>
+  </div>
+</nav>
+
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Korisnicko ime</th>
+      <th scope="col">Lozinka</th>
+      <th scope="col">Email</th>
+      <th scope="col">Putanja do slike</th>
+      <th scope="col">Izmena, brisanje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let korisnik of userList">
+      <td>{{korisnik.id}}</td>
+      <td>{{korisnik.korisnickoImeKorisnika}}</td>
+      <td>{{korisnik.lozinkaKorisnika}}</td>
+      <td>{{korisnik.emailKorisnika}}</td>
+      <td>{{korisnik.putanjaDoSlike}}</td>
+      <td>
+          <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editUser" (click)="editUser(korisnik)">Izmena</button>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteUser(korisnik)">Brisanje</button>
+      </td>
+
+    </tr>
+    
+  </tbody>
+</table>
+
+
+<!-- Add post modal -->
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Registracija korisnika</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    
+      <form [formGroup]="userDetail">
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Korisnicko ime </label>
+              <input type="text" formControlName="korisnickoImeKorisnika" class="form-control" id="korisnickoImeKorisnika" aria-describedby="emailHelp">
+            </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Lozinka </label>
+            <input type="text" formControlName="lozinkaKorisnika" class="form-control" id="lozinkaKorisnika" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email </label>
+              <input type="text" formControlName="emailKorisnika" class="form-control" id="emailKorisnika" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Slika </label>
+            <input type="text" formControlName="putanjaDoSlike" class="form-control" id="putanjaDoSlike" aria-describedby="emailHelp">
+        </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addUser()">Registruj se</button>
+            </div>
+        </form>
+
+  </div>
+  
+</div>
+</div>
+</div>
+
+
+<!-- Edit post modal -->
+<div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Izmena korisnika - detalji</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+      <form [formGroup]="userDetail">
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Korisnicko ime </label>
+              <input type="text" formControlName="korisnickoImeKorisnika" class="form-control" id="korisnickoImeKorisnika" aria-describedby="emailHelp">
+            </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Lozinka </label>
+            <input type="text" formControlName="lozinkaKorisnika" class="form-control" id="lozinkaKorisnika" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email </label>
+              <input type="text" formControlName="emailKorisnika" class="form-control" id="emailKorisnika" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Slika </label>
+              <input type="text" formControlName="putanjaDoSlike" class="form-control" id="putanjaDoSlike" aria-describedby="emailHelp">
+            </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+              <button type="button" class="btn btn-outline-success" (click)="updateUser()" data-bs-dismiss="modal">Izmeni </button>
+            </div>
+        </form>
+
+  </div>
+</div>
+</div>
+</div>
+      
+
+</div> 
